@@ -1,3 +1,6 @@
+//courtesy :)
+//https://github.com/i-tabu/copy.js
+
 (function () {
   function initCopyTags() {
     document.querySelectorAll('copy').forEach(function (el) {
