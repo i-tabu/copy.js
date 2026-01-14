@@ -7,26 +7,32 @@
       if (el.dataset.copyInit) return;
       el.dataset.copyInit = '1';
 
-      // Cache original text (before button is added)
+      // Cache original text ONLY
       var originalText = el.textContent.trim();
 
       el.style.position = 'relative';
-      el.style.paddingRight = '40px';
+      el.style.display = 'inline-block';
+      el.style.overflow = 'visible';
 
       var btn = document.createElement('span');
       btn.textContent = 'copy';
       btn.style.cssText = `
         position:absolute;
-        right:0;
+        left:100%;
+        margin-left:6px;
         top:0;
         font-size:12px;
         color:#007bff;
         cursor:pointer;
         display:none;
         user-select:none;
+        white-space:nowrap;
       `;
 
-      function show() { btn.style.display = 'inline'; }
+      function show() {
+        btn.style.display = 'inline';
+      }
+
       function hide() {
         btn.style.display = 'none';
         btn.textContent = 'copy';
