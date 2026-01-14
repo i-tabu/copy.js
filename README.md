@@ -17,3 +17,6 @@ Simplest (No BS) core js drop in copy.js
 ## For User
 - On hover it will show copy link 
 - On click of copy link it will copy to clipboard and show "copied" message
+
+## Demo
+[copy.js demo](https://i-tabu.github.io/copy.js/)
