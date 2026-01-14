@@ -1,38 +1,35 @@
 //courtesy :)
 //https://github.com/i-tabu/copy.js
-
 (function () {
   function initCopyTags() {
     document.querySelectorAll('copy').forEach(function (el) {
       if (el.dataset.copyInit) return;
       el.dataset.copyInit = '1';
 
-      // Cache original text ONLY
       var originalText = el.textContent.trim();
 
       el.style.position = 'relative';
       el.style.display = 'inline-block';
-      el.style.overflow = 'visible';
 
       var btn = document.createElement('span');
       btn.textContent = 'copy';
       btn.style.cssText = `
         position:absolute;
-        left:100%;
-        margin-left:6px;
-        top:0;
-        font-size:12px;
-        color:#007bff;
+        top:-20px;
+        right:-8px;
+        font-size:11px;
+        padding:2px 6px;
+        border-radius:4px;
+        background:#111;
+        color:#fff;
         cursor:pointer;
         display:none;
         user-select:none;
         white-space:nowrap;
+        z-index:10;
       `;
 
-      function show() {
-        btn.style.display = 'inline';
-      }
-
+      function show() { btn.style.display = 'inline-block'; }
       function hide() {
         btn.style.display = 'none';
         btn.textContent = 'copy';
@@ -47,9 +44,6 @@
         e.stopPropagation();
         navigator.clipboard.writeText(originalText).then(function () {
           btn.textContent = 'copied';
-          setTimeout(function () {
-            btn.textContent = 'copy';
-          }, 1000);
         });
       });
 
