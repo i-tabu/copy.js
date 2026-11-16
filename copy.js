@@ -40,13 +40,37 @@
       btn.addEventListener('mouseenter', show);
       btn.addEventListener('mouseleave', hide);
 
-      btn.addEventListener('click', function (e) {
+      btn.addEventListener('click', async function (e) {
         e.stopPropagation();
-        navigator.clipboard.writeText(originalText).then(function () {
+      
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(originalText);
+          } else {
+            var textarea = document.createElement('textarea');
+            textarea.value = originalText;
+            textarea.style.cssText = 'position:fixed;left:-9999px;top:0;';
+            document.body.appendChild(textarea);
+      
+            try {
+              textarea.focus();
+              textarea.select();
+      
+              if (!document.execCommand('copy')) {
+                throw new Error('Copy failed');
+              }
+            } finally {
+              textarea.remove();
+            }
+          }
+      
           btn.textContent = 'copied';
-        });
+        } catch (err) {
+          btn.textContent = 'copy failed';
+          console.error(err);
+        }
       });
-
+      
       el.appendChild(btn);
     });
   }
