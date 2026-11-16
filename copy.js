@@ -41,6 +41,8 @@
       btn.addEventListener('mouseleave', hide);
 
       btn.addEventListener('click', async function (e) {
+        //to stop from link getting clicked if it wraps a link
+        e.preventDefault();
         e.stopPropagation();
       
         try {
